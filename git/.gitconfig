@@ -1,0 +1,5 @@
+[core]
+	editor = nvim
+[user]
+	email = gustavospiess@gmail.com
+	name = Spiess
