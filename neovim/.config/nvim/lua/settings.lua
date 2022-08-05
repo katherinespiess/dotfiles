@@ -13,10 +13,9 @@ vim.opt.smartcase = true
 vim.opt.backup = true
 vim.opt.undofile = true
 vim.opt.undolevels = 3000
-vim.opt.backupdir = os.getenv('HOME') .. '/.config/nvim/backup/'
-vim.opt.directory = os.getenv('HOME') .. '/.config/nvim/swap/'
-vim.opt.undodir = os.getenv('HOME') .. '/.config/nvim/undo/'
+vim.opt.backupdir = os.getenv('HOME') .. '/.config/nvim/temp/backup/'
+vim.opt.directory = os.getenv('HOME') .. '/.config/nvim/temp/swap/'
+vim.opt.undodir = os.getenv('HOME') .. '/.config/nvim/temp/undo/'
 
---   set spellfile="~/.config/nvim/bundle/vim-spell-pt-br/spell/pt.utf-8.add"
---   set spelllang=pt_br,en_us
 
+vim.g.prosession_dir = '~/.config/nvim/temp/session'

@@ -1,3 +1,2 @@
-neovim/.config/nvim/backup/
-neovim/.config/nvim/undo/
-neovim/.config/nvim/swap/
+neovim/.config/nvim/temp/
+neovim/.config/nvim/plugin/
