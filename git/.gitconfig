@@ -3,3 +3,5 @@
 [user]
 	email = gustavospiess@gmail.com
 	name = Spiess
+[push]
+	default = current
