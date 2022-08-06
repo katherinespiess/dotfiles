@@ -55,4 +55,7 @@ return require('packer').startup(function(use)
 
     -- Latex
         use 'lervag/vimtex'
+
+    -- Colors
+        use 'folke/tokyonight.nvim'
 end)
