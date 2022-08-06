@@ -19,6 +19,6 @@ vim.opt.undodir = os.getenv('HOME') .. '/.config/nvim/temp/undo/'
 
 vim.g.prosession_dir = '~/.config/nvim/temp/session'
 
-vim.g.rooter_patterns = {'.git', 'Makefile', '*.sln', 'build/env.sh'}
+vim.g.rooter_patterns = {'.git', 'Makefile'}
 
 vim.cmd[[colorscheme tokyonight]]
