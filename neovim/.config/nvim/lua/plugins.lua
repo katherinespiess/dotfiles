@@ -54,8 +54,19 @@ return require('packer').startup(function(use)
         use 'dhruvasagar/vim-prosession'
 
     -- Latex
-        use 'lervag/vimtex'
+        use { 
+            'lervag/vimtex',
+            config = require('config.vimtex'),
+            ft = {'tex'}
+        }
+
+    -- snippets
+        use {
+            'sirver/ultisnips',
+            config = require('config.ultisnips')
+        }
 
     -- Colors
         use 'folke/tokyonight.nvim'
+        use 'dracula/vim'
 end)

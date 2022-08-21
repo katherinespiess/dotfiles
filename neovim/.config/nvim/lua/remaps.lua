@@ -1,4 +1,5 @@
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 local keymap = vim.api.nvim_set_keymap
 local opts_silent = { noremap = true, silent = true }
@@ -21,7 +22,7 @@ keymap('n', '?', '?\\v', opts)
 keymap('v', '?', '?\\v', opts)
 
 
-keymap('n', '<leader>F', ':FzfLua builtin<CR>', opts_silent)
+keymap('n', '<leader><leader>', ':FzfLua builtin<CR>', opts_silent)
 keymap('n', '<leader>f', ':FzfLua git_files<CR>', opts_silent)
 keymap('n', '<leader>b', ':FzfLua buffers<CR>', opts_silent)
 
