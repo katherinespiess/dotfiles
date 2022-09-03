@@ -2,6 +2,8 @@ vim.o.clipboard = 'unnamedplus'
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn='number'
+
 vim.opt.scrolloff = 14
 
 vim.opt.shiftwidth = 4
@@ -16,6 +18,8 @@ vim.opt.undolevels = 3000
 vim.opt.backupdir = vim.env.HOME .. '/.config/nvim/temp/backup/'
 vim.opt.directory = vim.env.HOME .. '/.config/nvim/temp/swap/'
 vim.opt.undodir = vim.env.HOME .. '/.config/nvim/temp/undo/'
+
+vim.opt.completeopt= { 'menu', 'menuone', 'noselect', }
 
 vim.opt.conceallevel = 1
 vim.opt.wrap = false
