@@ -15,6 +15,17 @@ return require('packer').startup(function(use)
           -- optional for icon support
           requires = { 'kyazdani42/nvim-web-devicons' }
         }
+        use {
+
+        }
+
+    --programming
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+
+    use {'p00f/nvim-ts-rainbow'}
 
     -- Aditional Objects
         use 'kana/vim-textobj-user'
@@ -56,14 +67,14 @@ return require('packer').startup(function(use)
     -- Latex
         use { 
             'lervag/vimtex',
-            config = require('config.vimtex'),
+            config = 'require(\'config.vimtex\')',
             ft = {'tex'}
         }
 
     -- snippets
         use {
             'sirver/ultisnips',
-            config = require('config.ultisnips')
+            config = 'require(\'config.ultisnips\')',
         }
 
     -- Style and collors
@@ -75,4 +86,6 @@ return require('packer').startup(function(use)
           config = require('lualine').setup()
         }
         use 'edkolev/tmuxline.vim'
+
+
 end)

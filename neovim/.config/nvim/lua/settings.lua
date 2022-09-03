@@ -23,7 +23,7 @@ vim.opt.wrap = false
 vim.cmd[[let g:pencil#conceallevel = 0]]
 
 vim.g.prosession_dir = vim.env.HOME .. '/.config/nvim/temp/session'
-
 vim.g.rooter_patterns = {'.root', '.git', 'Makefile'}
 
 vim.cmd[[colorscheme tokyonight]]
+

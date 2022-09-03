@@ -24,6 +24,7 @@ keymap('v', '?', '?\\v', opts)
 
 keymap('n', '<leader><leader>', ':FzfLua builtin<CR>', opts_silent)
 keymap('n', '<leader>f', ':FzfLua git_files<CR>', opts_silent)
+keymap('n', '<leader>F', ':FzfLua files<CR>', opts_silent)
 keymap('n', '<leader>b', ':FzfLua buffers<CR>', opts_silent)
 
 

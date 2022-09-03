@@ -1,4 +1,6 @@
 require('plugins')
 require('settings')
 require('remaps')
-require('filetypes.tex')
+require('treesitter')
+require('line')
+require('netrw')
