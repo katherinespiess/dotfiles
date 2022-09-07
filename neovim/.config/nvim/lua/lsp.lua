@@ -30,7 +30,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    -- vim.keymap.set('n', '<space>ca', function() vim.cmd[[CodeActionMenu]] end, bufopts)
+    vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '==', vim.lsp.buf.formatting, bufopts)
 end
 
@@ -58,8 +59,22 @@ require('lspconfig')['sumneko_lua'].setup {
     },
 }
 
+
 require('lspconfig')['ltex'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
 }
+
+
+require('lspconfig')['lemminx'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+
+-- require('lspconfig')['pyrigh'].setup {
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--     capabilities = capabilities,
+-- }

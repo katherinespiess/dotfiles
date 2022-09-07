@@ -15,9 +15,6 @@ return require('packer').startup(function(use)
         -- optional for icon support
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
-    use {
-        'neovim/nvim-lspconfig'
-    }
 
     --programming
     use {
@@ -27,6 +24,7 @@ return require('packer').startup(function(use)
 
     use { 'p00f/nvim-ts-rainbow', }
     use { 'sirver/ultisnips', config = 'require(\'config.ultisnips\')', }
+    use { 'honza/vim-snippets', }
 
     use { 'neovim/nvim-lspconfig', }
     use { 'hrsh7th/cmp-nvim-lsp' }
@@ -35,6 +33,11 @@ return require('packer').startup(function(use)
     use { 'hrsh7th/cmp-cmdline', }
     use { 'hrsh7th/nvim-cmp', config = 'require(\'config.cmp\')' }
     use { 'williamboman/nvim-lsp-installer', }
+    -- use { 'mfussenegger/nvim-jdtls', ft = { 'java', }, }
+    use { 'mfussenegger/nvim-jdtls', }
+    use { 'quangnguyen30192/cmp-nvim-ultisnips', }
+    use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', }
+    -- use { 'weilbith/nvim-code-action-menu', }
 
     -- Aditional Objects
     use 'kana/vim-textobj-user'
@@ -51,7 +54,20 @@ return require('packer').startup(function(use)
 
     -- Matching:
     use 'tmhedberg/matchit'
-    use 'jiangmiao/auto-pairs'
+    -- use 'jiangmiao/auto-pairs'
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup {
+                ts_config = {
+                    -- lua = {'string'},-- it will not add a pair on that treesitter node
+                    -- javascript = {'template_string'},
+                    -- java = false,-- don't check treesitter on java
+                }
+            }
+        end
+    }
+    use { 'windwp/nvim-ts-autotag', config = function () require('nvim-ts-autotag').setup() end }
 
     -- Tasks:
     use 'tpope/vim-dispatch'
