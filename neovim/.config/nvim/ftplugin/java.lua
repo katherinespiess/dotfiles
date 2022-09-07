@@ -73,41 +73,13 @@ local config = {
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
 
--- Enable completion triggered by <c-x><c-o>
--- vim.api.nvim_buf_set_option(vim.api.nvim_buf_get_number(0), 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
--- Mappings.
--- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap = true, silent = true, buffer = vim.api.nvim_buf_get_number(0) }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, bufopts)
-vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
--- vim.keymap.set('n', '<space>ca', function() vim.cmd[[CodeActionMenu]] end, bufopts)
-vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', '==', vim.lsp.buf.formatting, bufopts)
-
-
-
--- nnoremap <A-o> <Cmd>lua require'jdtls'.organize_imports()<CR>
--- nnoremap crv <Cmd>lua require('jdtls').extract_variable()<CR>
+local lsp = require('lsp')
+lsp.on_attach(nil, vim.api.nvim_buf_get_number(0))
+local bufopts = lsp.bufopts(vim.api.nvim_buf_get_number(0))
 vim.keymap.set('n', 'crv', require('jdtls').extract_variable, bufopts)
 vim.keymap.set('v', 'crv', require('jdtls').extract_variable, bufopts)
--- vnoremap crv <Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>
---
 vim.keymap.set('n', 'crc', require('jdtls').extract_constant, bufopts)
 vim.keymap.set('v', 'crc', require('jdtls').extract_constant, bufopts)
--- nnoremap crc <Cmd>lua require('jdtls').extract_constant()<CR>
--- vnoremap crc <Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>
---
 vim.keymap.set('v', 'crm', require('jdtls').extract_method, bufopts)
--- vnoremap crm <Esc><Cmd>lua require('jdtls').extract_method(true)<CR>
+vim.keymap.set('n', 'crm', require('jdtls').extract_method, bufopts)

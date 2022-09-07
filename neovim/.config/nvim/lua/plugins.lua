@@ -1,15 +1,11 @@
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    -- Version management / undo
-    -- Undo tree
-    use 'mbbill/undotree'
     -- Git management:
-    use 'tpope/vim-fugitive'
+    use 'tpope/vim-fugitive' --TODO change for a lua one.
 
-    -- fuzzy finder
-    use { 'ibhagwan/fzf-lua',
-        -- optional for icon support
+    use {
+        'ibhagwan/fzf-lua',
         requires = { 'kyazdani42/nvim-web-devicons' }
     }
 
@@ -26,82 +22,93 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'p00f/nvim-ts-rainbow', }
-    use { 'sirver/ultisnips', config = 'require(\'config.ultisnips\')', }
+    use {
+        'sirver/ultisnips', --TODO change for a lua one.
+        config = function()
+            require('config.ultisnips')
+        end,
+    }
     use { 'honza/vim-snippets', }
 
-    use { 'hrsh7th/nvim-cmp', config = 'require(\'config.cmp\')' }
+    use {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            require('config.cmp')
+        end,
+        after = {
+            'cmp-nvim-lsp',
+            'cmp-buffer',
+            'cmp-path',
+            'cmp-cmdline',
+            'cmp-nvim-lsp-document-symbol',
+            'cmp-spell',
+            'cmp-tmux',
+            'cmp-nvim-ultisnips',
+        }
+    }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-buffer', }
     use { 'hrsh7th/cmp-path', }
     use { 'hrsh7th/cmp-cmdline', }
-    use { 'hrsh7th/cmp-emoji', }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol', }
-    use { 'hrsh7th/cmp-omni', }
     use { 'f3fora/cmp-spell', }
     use { 'andersevenrud/cmp-tmux', }
+    use { 'quangnguyen30192/cmp-nvim-ultisnips', }
 
     use { 'neovim/nvim-lspconfig', }
     use { 'williamboman/nvim-lsp-installer', }
     use { 'mfussenegger/nvim-jdtls', }
-    use { 'quangnguyen30192/cmp-nvim-ultisnips', }
     use { "ray-x/lsp_signature.nvim", }
     use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', }
 
     -- Aditional Objects
-    use 'kana/vim-textobj-user'
+    use 'kana/vim-textobj-user' --TODO change for a lua one
     -- Indentation
-    use 'michaeljsmith/vim-indent-object'
+    use 'michaeljsmith/vim-indent-object' --TODO change for a lua one
     -- entire file object:
-    use 'kana/vim-textobj-entire'
+    use 'kana/vim-textobj-entire' --TODO change for a lua one
     -- Comment as object:
-    use 'glts/vim-textobj-comment'
+    use 'glts/vim-textobj-comment' --TODO change for a lua one
 
-    -- Formatting and writing helpers
-    use 'Konfekt/vim-sentence-chopper'
-    use 'preservim/vim-pencil'
+    use {
+        'preservim/vim-pencil',
+        cmd = { 'Pencil', 'PencilSoft', 'PencilHard', 'PencilToggle' }
+    }
 
-    -- Matching:
-    use 'tmhedberg/matchit'
-    -- use 'jiangmiao/auto-pairs'
     use {
         'windwp/nvim-autopairs',
         config = function()
-            require('nvim-autopairs').setup {
-                ts_config = {
-                    -- lua = {'string'},-- it will not add a pair on that treesitter node
-                    -- javascript = {'template_string'},
-                    -- java = false,-- don't check treesitter on java
-                }
-            }
+            require('nvim-autopairs').setup {}
         end
     }
-    use { 'windwp/nvim-ts-autotag', config = function () require('nvim-ts-autotag').setup() end }
-
-    -- Tasks:
-    use 'tpope/vim-dispatch'
 
     -- Rooter
-    use 'airblade/vim-rooter'
+    use 'airblade/vim-rooter' --TODO change for a lua one
 
     -- Pending operator actions:
     -- Comment as action:
-    use 'tomtom/tcomment_vim'
+    use 'tomtom/tcomment_vim' --TODO change for a lua one
     -- Replace with registry:
-    use 'vim-scripts/ReplaceWithRegister'
-    -- Evaluation:
-    use 'arecarn/vim-crunch'
+    use 'vim-scripts/ReplaceWithRegister' --TODO change for a lua one
     -- surround:
-    use 'tpope/vim-surround'
+    use 'tpope/vim-surround' --TODO change for a lua one
 
-    -- Session storage:
+    -- Session storage: TODO check configuration for this bad boys later
     use 'tpope/vim-obsession'
     use 'dhruvasagar/vim-prosession'
 
     -- Latex
     use {
         'lervag/vimtex',
-        config = 'require(\'config.vimtex\')',
+        config = function()
+            vim.cmd [[syntax enable]]
+            vim.g.syntax = true
+            vim.g.vimtex_view_general_viewer = 'zathura'
+            vim.g.vimtex_view_method = 'zathura'
+            vim.g.tex_flavor = 'latex'
+            vim.g.vimtex_quickfix_mode = 0
+            vim.g.tex_conceal = 'abdmg'
+        end,
         ft = { 'tex' }
     }
 

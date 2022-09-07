@@ -16,31 +16,14 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        -- { name = 'omni' },
         { name = 'ultisnips' },
         { name = 'buffer' },
         { name = 'tmux' },
         { name = 'path' },
         { name = 'nvim_lsp_document_symbol' },
         { name = 'spell', },
-        { name = 'emoji' },
     })
 })
-
--- cmp.setup.filetype('tex', {
---     sources = cmp.config.sources({
---         { name = 'nvim_lsp' },
---         { name = 'omni' },
---         { name = 'ultisnips' },
---         { name = 'buffer' },
---         { name = 'tmux' },
---         { name = 'path' },
---         { name = 'nvim_lsp_document_symbol' },
---         { name = 'spell', },
---         { name = 'emoji' },
---     })
--- })
-
 
 cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
