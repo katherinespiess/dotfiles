@@ -1,4 +1,10 @@
-require("nvim-lsp-installer").setup {}
+require("nvim-lsp-installer").setup {
+    automatic_installation = true,
+}
+
+
+local cfg = {}  -- add you config here
+require "lsp_signature".setup(cfg)
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -10,9 +16,9 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -31,6 +37,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     -- vim.keymap.set('n', '<space>ca', function() vim.cmd[[CodeActionMenu]] end, bufopts)
+    vim.keymap.set('n', '<space>cA', function() vim.cmd[[CodeActionMenu]] end, bufopts)
     vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '==', vim.lsp.buf.formatting, bufopts)
 end
@@ -42,39 +49,26 @@ local lsp_flags = {
 
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['sumneko_lua'].setup {
-}
 
-require('lspconfig')['sumneko_lua'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-    settings = {
+local lsp_table = {
+    sumneko_lua = {
         Lua = {
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
+            diagnostics = { globals = { 'vim', 'require' }, },
         },
     },
+    ltex = {},
+    texlab = {},
+    lemminx = {},
+    pyrigh = {},
 }
 
+local lspconfig = require('lspconfig');
 
-require('lspconfig')['ltex'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-}
-
-
-require('lspconfig')['lemminx'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-}
-
--- require('lspconfig')['pyrigh'].setup {
---     on_attach = on_attach,
---     flags = lsp_flags,
---     capabilities = capabilities,
--- }
+for lsp_server_name,settings in pairs(lsp_table) do
+    lspconfig[lsp_server_name].setup({
+        on_attach = on_attach,
+        flags = lsp_flags,
+        capabilities = capabilities,
+        settings = settings,
+    })
+end

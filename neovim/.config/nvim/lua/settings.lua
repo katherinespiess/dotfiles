@@ -2,6 +2,9 @@ vim.o.clipboard = 'unnamedplus'
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+vim.opt.spell = true
+
 vim.opt.signcolumn='number'
 
 vim.opt.scrolloff = 14
@@ -30,4 +33,3 @@ vim.g.prosession_dir = vim.env.HOME .. '/.config/nvim/temp/session'
 vim.g.rooter_patterns = {'.root', '.git', 'Makefile'}
 
 vim.cmd[[colorscheme tokyonight]]
-

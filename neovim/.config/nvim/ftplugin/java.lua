@@ -74,7 +74,7 @@ local config = {
 require('jdtls').start_or_attach(config)
 
 -- Enable completion triggered by <c-x><c-o>
-vim.api.nvim_buf_set_option(vim.api.nvim_buf_get_number(0), 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- vim.api.nvim_buf_set_option(vim.api.nvim_buf_get_number(0), 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions

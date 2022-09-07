@@ -1,10 +1,7 @@
--- Only required if you have packer configured as `opt`
--- vim.cmd [[packadd packer.nvim]]
-
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
-    -- Version managemente / undo
+    -- Version management / undo
     -- Undo tree
     use 'mbbill/undotree'
     -- Git management:
@@ -22,22 +19,34 @@ return require('packer').startup(function(use)
         run = ':TSUpdate'
     }
 
+    use {
+        'lewis6991/spellsitter.nvim',
+        config = function()
+            require('spellsitter').setup()
+        end
+    }
+
     use { 'p00f/nvim-ts-rainbow', }
     use { 'sirver/ultisnips', config = 'require(\'config.ultisnips\')', }
     use { 'honza/vim-snippets', }
 
-    use { 'neovim/nvim-lspconfig', }
+    use { 'hrsh7th/nvim-cmp', config = 'require(\'config.cmp\')' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-buffer', }
     use { 'hrsh7th/cmp-path', }
     use { 'hrsh7th/cmp-cmdline', }
-    use { 'hrsh7th/nvim-cmp', config = 'require(\'config.cmp\')' }
+    use { 'hrsh7th/cmp-emoji', }
+    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', }
+    use { 'hrsh7th/cmp-omni', }
+    use { 'f3fora/cmp-spell', }
+    use { 'andersevenrud/cmp-tmux', }
+
+    use { 'neovim/nvim-lspconfig', }
     use { 'williamboman/nvim-lsp-installer', }
-    -- use { 'mfussenegger/nvim-jdtls', ft = { 'java', }, }
     use { 'mfussenegger/nvim-jdtls', }
     use { 'quangnguyen30192/cmp-nvim-ultisnips', }
+    use { "ray-x/lsp_signature.nvim", }
     use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', }
-    -- use { 'weilbith/nvim-code-action-menu', }
 
     -- Aditional Objects
     use 'kana/vim-textobj-user'
@@ -96,7 +105,7 @@ return require('packer').startup(function(use)
         ft = { 'tex' }
     }
 
-    -- Style and collors
+    -- Style and colors
     use 'folke/tokyonight.nvim'
     use 'dracula/vim'
     use {

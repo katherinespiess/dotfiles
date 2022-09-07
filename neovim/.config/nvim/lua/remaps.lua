@@ -16,10 +16,8 @@ keymap('n', '<leader>B', ':buffers!<cr>:buf', opts_silent)
 
 keymap('n', '<leader>sp', ':setlocal spell!<cr>', opts_silent)
 
-keymap('n', '/', '/\\v', opts)
-keymap('v', '/', '/\\v', opts)
-keymap('n', '?', '?\\v', opts)
-keymap('v', '?', '?\\v', opts)
+keymap('n', '?', '/\\v', opts)
+keymap('v', '?', '/\\v', opts)
 
 
 keymap('n', '<leader><leader>', ':FzfLua builtin<CR>', opts_silent)
