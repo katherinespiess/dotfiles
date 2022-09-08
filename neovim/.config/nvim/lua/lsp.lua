@@ -1,9 +1,9 @@
 local lsp = {}
 
 lsp.bufopts = function(bufnr) return { noremap = true, silent = true, buffer = bufnr } end
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+
 lsp.on_attach = function(_, bufnr)
+
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -23,7 +23,7 @@ lsp.on_attach = function(_, bufnr)
 
     local invalid_resource = function(resource)
         return function()
-            print('resource '.. resource .. ' seems to be unavailable to this language')
+            print('resource ' .. resource .. ' seems to be unavailable to this language')
         end
     end
 
@@ -36,27 +36,37 @@ lsp.on_attach = function(_, bufnr)
     vim.keymap.set('n', 'crm', invalid_resource('extract_method'), bufopts)
 end
 
-local lsp_flags = {
-    -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
-}
-
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-local lsp_table = {
-    sumneko_lua = {
-        Lua = {
-            diagnostics = { globals = { 'vim', 'require' }, },
-        },
-    },
-    ltex = {},
-    texlab = {},
-    lemminx = {},
-    pyrigh = {},
-}
-
 lsp.setup = function()
+
+    local ok, installer = pcall(require, "nvim-lsp-installer")
+    if not ok then
+        return
+    end
+    installer.setup {
+        automatic_installation = true,
+    }
+
+    local ok2, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+    if not ok2 then
+        return
+    end
+
+    local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    local lsp_table = {
+        sumneko_lua = {
+            Lua = {
+                diagnostics = { globals = { 'vim', 'require' }, },
+            },
+        },
+        ltex = {},
+        texlab = {},
+        lemminx = {},
+        pyrigh = {},
+    }
+
+
 
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -72,7 +82,6 @@ lsp.setup = function()
     for lsp_server_name, settings in pairs(lsp_table) do
         lspconfig[lsp_server_name].setup({
             on_attach = lsp.on_attach,
-            flags = lsp_flags,
             capabilities = capabilities,
             settings = settings,
         })
