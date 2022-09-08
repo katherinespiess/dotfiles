@@ -1,4 +1,6 @@
+
 return require('packer').startup(function(use)
+
     use 'wbthomason/packer.nvim'
 
     -- Git management:
@@ -6,7 +8,15 @@ return require('packer').startup(function(use)
 
     use {
         'ibhagwan/fzf-lua',
-        requires = { 'kyazdani42/nvim-web-devicons' }
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require("fzf-lua").setup({
+                lsp = {
+                    -- make lsp requests synchronous so they work with null-ls
+                    async_or_timeout = 3000,
+                },
+            })
+        end
     }
 
     --programming
@@ -46,29 +56,49 @@ return require('packer').startup(function(use)
             'cmp-nvim-ultisnips',
         }
     }
-    use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-buffer', }
     use { 'hrsh7th/cmp-path', }
     use { 'hrsh7th/cmp-cmdline', }
-    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', }
     use { 'f3fora/cmp-spell', }
     use { 'andersevenrud/cmp-tmux', }
     use { 'quangnguyen30192/cmp-nvim-ultisnips', }
+    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', }
+    use { 'hrsh7th/cmp-nvim-lsp', }
 
-    use { 'neovim/nvim-lspconfig', }
-    use { 'williamboman/nvim-lsp-installer', }
-    use { 'mfussenegger/nvim-jdtls', }
-    use { "ray-x/lsp_signature.nvim", }
+    use {
+        'neovim/nvim-lspconfig',
+        ft = { 'java', 'lua', 'python', 'tex', 'gitcommit' },
+        config = function() require('lsp').setup({}) end }
+    use {
+        'williamboman/nvim-lsp-installer',
+        after = { 'nvim-lspconfig' },
+        config = function() 
+            require("nvim-lsp-installer").setup {
+                automatic_installation = true,
+            }
+        end,
+    }
+    use {
+        "ray-x/lsp_signature.nvim",
+        after = { 'nvim-lspconfig' },
+        config = function ()
+            require "lsp_signature".setup({})
+        end,
+    }
     use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', }
+    use {
+        'mfussenegger/nvim-jdtls', ft = { 'java' } ,
+        after = { 'nvim-lspconfig' },
+    }
 
     -- Aditional Objects
     use 'kana/vim-textobj-user' --TODO change for a lua one
     -- Indentation
-    use 'michaeljsmith/vim-indent-object' --TODO change for a lua one
+    use { 'michaeljsmith/vim-indent-object', after = 'nvim-lspconfig'} --TODO change for a lua one
     -- entire file object:
     use 'kana/vim-textobj-entire' --TODO change for a lua one
     -- Comment as object:
-    use 'glts/vim-textobj-comment' --TODO change for a lua one
+    use { 'glts/vim-textobj-comment', after = 'nvim-lspconfig', }--TODO change for a lua one
 
     use {
         'preservim/vim-pencil',
@@ -87,7 +117,7 @@ return require('packer').startup(function(use)
 
     -- Pending operator actions:
     -- Comment as action:
-    use 'tomtom/tcomment_vim' --TODO change for a lua one
+    use { 'tomtom/tcomment_vim', after = 'nvim-lspconfig' } --TODO change for a lua one
     -- Replace with registry:
     use 'vim-scripts/ReplaceWithRegister' --TODO change for a lua one
     -- surround:
@@ -109,12 +139,13 @@ return require('packer').startup(function(use)
             vim.g.vimtex_quickfix_mode = 0
             vim.g.tex_conceal = 'abdmg'
         end,
-        ft = { 'tex' }
+        ft = { 'tex' },
+        after = 'dracula',
     }
 
     -- Style and colors
     use 'folke/tokyonight.nvim'
-    use 'dracula/vim'
+    use { 'dracula/vim', ft = 'tex', }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },

@@ -58,14 +58,6 @@ local lsp_table = {
 
 lsp.setup = function()
 
-    require("nvim-lsp-installer").setup {
-        automatic_installation = true,
-    }
-
-
-    local cfg = {} -- add you config here
-    require "lsp_signature".setup(cfg)
-
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap = true, silent = true }
