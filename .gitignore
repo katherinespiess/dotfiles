@@ -1,3 +1,13 @@
 neovim/.config/nvim/temp/
 neovim/.config/nvim/plugin/
 tmux/.tmux/resurrect/
+!neovim/.local/share/nvim/lsp_servers/jdtls/config_linux/config.ini
+neovim/.local/share/nvim/lsp_servers/jdtls/config_linux/*
+neovim/.local/share/nvim/lsp_servers/jdtls/config_linux/org.eclipse.equinox.app/.manager/*
+
+neovim/.local/share/nvim/site/pack/packer/opt/vim-pencil/*
+neovim/.local/share/nvim/site/pack/packer/start/ReplaceWithRegister/*
+neovim/.local/share/nvim/site/pack/packer/start/cmp-tmux/*
+neovim/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim/*
+neovim/.local/share/nvim/site/pack/packer/start/nvim-jdtls/*
+neovim/.local/share/nvim/site/pack/packer/start/vim-textobj-entire/*
