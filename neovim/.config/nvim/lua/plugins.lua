@@ -50,35 +50,26 @@ return require('packer').startup(function(use)
         config = function()
             require('config.cmp')
         end,
-        -- after = {
-        --     'cmp-nvim-lsp',
-        --     'cmp-buffer',
-        --     'cmp-path',
-        --     'cmp-cmdline',
-        --     'cmp-nvim-lsp-document-symbol',
-        --     'cmp-spell',
-        --     'cmp-tmux',
-        --     'cmp-nvim-ultisnips',
-        -- },
+        requires = {
+            'onsails/lspkind.nvim',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'f3fora/cmp-spell',
+            'andersevenrud/cmp-tmux',
+            'quangnguyen30192/cmp-nvim-ultisnips',
+            'hrsh7th/cmp-nvim-lsp-document-symbol',
+            'hrsh7th/cmp-nvim-lsp',
+        },
         event = 'VimEnter',
     }
-    use { 'hrsh7th/cmp-buffer', event = 'VimEnter', }
-    use { 'hrsh7th/cmp-path', event = 'VimEnter', }
-    use { 'hrsh7th/cmp-cmdline', event = 'VimEnter', }
-    use { 'f3fora/cmp-spell', event = 'VimEnter', }
-    use { 'andersevenrud/cmp-tmux', event = 'VimEnter', }
-    use { 'quangnguyen30192/cmp-nvim-ultisnips', event = 'VimEnter', }
-    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'VimEnter', }
-    use { 'hrsh7th/cmp-nvim-lsp', event = 'VimEnter', }
 
     use {
         'neovim/nvim-lspconfig',
-        ft = { 'java', 'lua', 'python', 'tex', 'gitcommit' },
         config = function() require('lsp').setup({}) end,
     }
     use {
         'williamboman/nvim-lsp-installer',
-        after = { 'nvim-lspconfig' },
         config = function()
             require("nvim-lsp-installer").setup {
                 automatic_installation = true,
@@ -89,14 +80,41 @@ return require('packer').startup(function(use)
     use {
         "ray-x/lsp_signature.nvim",
         after = { 'nvim-lspconfig' },
-        config = function ()
+        config = function()
             require "lsp_signature".setup({})
         end,
     }
     use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu', }
     use {
-        'mfussenegger/nvim-jdtls', ft = { 'java' } ,
+        'mfussenegger/nvim-jdtls', ft = { 'java' },
         after = { 'nvim-lspconfig' },
+        config = function()
+            require('java')
+        end,
+    }
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            local null_ls = require('null-ls')
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.diagnostics.flake8,
+                    null_ls.builtins.diagnostics.mypy,
+                    null_ls.builtins.code_actions.refactoring,
+                }
+            })
+        end
+    }
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        },
+        config = function()
+            require('refactoring').setup({})
+        end,
     }
 
     -- Aditional Objects
@@ -115,10 +133,6 @@ return require('packer').startup(function(use)
         event = 'VimEnter',
     } --TODO change for a lua one
     -- Comment as object:
-    use {
-        'glts/vim-textobj-comment',
-        after = 'nvim-lspconfig',
-    }--TODO change for a lua one
 
     use {
         'preservim/vim-pencil',
@@ -138,15 +152,12 @@ return require('packer').startup(function(use)
     -- Pending operator actions:
     -- Comment as action:
     use { 'tomtom/tcomment_vim', after = 'nvim-lspconfig' } --TODO change for a lua one
-    -- Replace with registry:
     use {
         'vim-scripts/ReplaceWithRegister',
-        event = 'VimEnter',
     } --TODO change for a lua one
     -- surround:
     use {
         'tpope/vim-surround',
-        event = 'VimEnter',
     } --TODO change for a lua one
 
     -- Session storage: TODO check configuration for this bad boys later
@@ -171,7 +182,7 @@ return require('packer').startup(function(use)
 
     -- Style and colors
     use 'folke/tokyonight.nvim'
-    use { 'dracula/vim', ft = 'tex', }
+    use { 'dracula/vim' }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },

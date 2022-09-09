@@ -63,7 +63,7 @@ lsp.setup = function()
         ltex = {},
         texlab = {},
         lemminx = {},
-        pyrigh = {},
+        pyright = {},
     }
 
 
