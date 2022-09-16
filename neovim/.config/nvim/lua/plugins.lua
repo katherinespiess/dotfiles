@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
     use {
         'ibhagwan/fzf-lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        cmp = 'FzfLua',
+        cmd = 'FzfLua',
         config = function()
             require("fzf-lua").setup({
                 lsp = {
@@ -25,7 +25,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        event = 'VimEnter',
     }
 
     use {
@@ -50,18 +49,27 @@ return require('packer').startup(function(use)
         config = function()
             require('config.cmp')
         end,
-        requires = {
-            'onsails/lspkind.nvim',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'f3fora/cmp-spell',
-            'andersevenrud/cmp-tmux',
-            'quangnguyen30192/cmp-nvim-ultisnips',
-            'hrsh7th/cmp-nvim-lsp-document-symbol',
-            'hrsh7th/cmp-nvim-lsp',
-        },
-        event = 'VimEnter',
+    }
+    use { 'onsails/lspkind.nvim', }
+    use { 'hrsh7th/cmp-buffer', }
+    use { 'hrsh7th/cmp-path', }
+    use { 'hrsh7th/cmp-cmdline', }
+    use { 'f3fora/cmp-spell', }
+    use { 'andersevenrud/cmp-tmux', }
+    use { 'quangnguyen30192/cmp-nvim-ultisnips', }
+    use { 'hrsh7th/cmp-nvim-lsp-document-symbol', }
+    use { 'hrsh7th/cmp-nvim-lsp', }
+
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
     }
 
     use {
@@ -105,16 +113,6 @@ return require('packer').startup(function(use)
                 }
             })
         end
-    }
-    use {
-        "ThePrimeagen/refactoring.nvim",
-        requires = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" }
-        },
-        config = function()
-            require('refactoring').setup({})
-        end,
     }
 
     -- Aditional Objects
@@ -176,13 +174,13 @@ return require('packer').startup(function(use)
             vim.g.vimtex_quickfix_mode = 0
             vim.g.tex_conceal = 'abdmg'
         end,
-        ft = { 'tex' },
-        after = 'dracula',
+        ft = { 'tex', },
+        after = { 'dracula', },
     }
 
     -- Style and colors
     use 'folke/tokyonight.nvim'
-    use { 'dracula/vim' }
+    use { 'dracula/vim', as = 'dracula' }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
