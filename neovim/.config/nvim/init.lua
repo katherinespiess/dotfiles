@@ -1,6 +1,6 @@
 require('plugins')
 require('settings')
-require('remaps')
+require('remaps').setup()
 require('treesitter')
 require('line')
 require('netrw')

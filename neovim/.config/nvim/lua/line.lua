@@ -24,16 +24,9 @@ local diff = {
     cond = hide_in_width
 }
 
-local mode = {
-    "mode",
-    fmt = function(str)
-        return "-- " .. str .. " --"
-    end,
-}
-
 local filetype = {
     "filetype",
-    icons_enabled = false,
+    icons_enabled = true,
     icon = nil,
 }
 
@@ -45,7 +38,7 @@ local branch = {
 
 local location = {
     "location",
-    padding = 0,
+    padding = 1,
 }
 
 -- cool function for progress
@@ -72,11 +65,10 @@ lualine.setup({
         always_divide_middle = true,
     },
     sections = {
-        lualine_a = { branch, diagnostics },
-        lualine_b = { mode },
-        lualine_c = {},
-        -- lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_x = { diff, spaces, "encoding", filetype },
+        lualine_a = { branch, diff, },
+        lualine_b = { diagnostics, },
+        lualine_c = { 'filename' },
+        lualine_x = { spaces, "encoding", filetype },
         lualine_y = { location },
         lualine_z = { progress },
     },
