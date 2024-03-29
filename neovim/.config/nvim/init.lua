@@ -1,7 +1,0 @@
-require('plugins')
-require('settings')
-require('remaps').setup()
-require('treesitter')
-require('line')
-require('netrw')
-require('lsp').setup({})
