@@ -1,11 +1,11 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
@@ -13,9 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.opt.shiftwidth=2
 
-require("lazy").setup({
+require('lazy').setup({
   {
-    "folke/tokyonight.nvim",
+    'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
     config = function()
@@ -23,25 +23,87 @@ require("lazy").setup({
     end,
   },
 
+  { 'honza/vim-snippets',
+    dependencies = {
+      'SirVer/ultisnips'
+    },
+  },
+
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
 	'neovim/nvim-lspconfig',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
 	'hrsh7th/cmp-cmdline',
+        'SirVer/ultisnips',
+        'quangnguyen30192/cmp-nvim-ultisnips'
     },
+    config = function()
+      local cmp = require'cmp'
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'ultisnips' }, -- For ultisnips users.
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+          { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
+      })
+
+    end,
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
     config = function () 
-      local configs = require("nvim-treesitter.configs")
+      local configs = require('nvim-treesitter.configs')
 
       configs.setup({
-          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+          ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'elixir', 'heex', 'javascript', 'html' },
           sync_install = false,
           highlight = { enable = true },
           indent = { enable = true },  
@@ -97,10 +159,32 @@ require("lazy").setup({
     'tpope/vim-fugitive',
     cmd = { 'Git' },
   },
-  {'ahayworth/ink-syntax-vim'},
+  {
+    'ahayworth/ink-syntax-vim',
+    ft = 'ink',
+  },
 
-  'tpope/vim-obsession',
-  'dhruvasagar/vim-prosession',
+  {
+    'dhruvasagar/vim-prosession',
+    dependencies = {
+    'tpope/vim-obsession',
+    'nvim-telescope/telescope.nvim', 
+    },
+    event = 'VimEnter',
+    config = function()
+      require('telescope').load_extension('prosession')
+      if vim.fn.has('gui_running') then
+        vim.cmd('Telescope prosession')
+      end
+    end,
+  },
+
+  {
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  }
+
 })
 
 
@@ -115,7 +199,7 @@ vim.opt.signcolumn='number'
 
 vim.opt.scrolloff = 14
 
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.opt.ignorecase = true
@@ -150,4 +234,10 @@ keymap('n', 'zf', 'z=', remaps.opts_silent)
 keymap('n', '<leader>n', ':bnext<CR>', remaps.opts_silent)
 keymap('n', '<leader>p', ':bprevious<CR>', remaps.opts_silent)
 keymap('n', '<leader>a', ':buf #<CR>', remaps.opts_silent)
+keymap('n', '<leader><leader>', ':Telescope builtin<CR>', remaps.opts_silent)
+
+if vim.fn.has('gui_running') then
+  -- vim.opt.guifont = 'Fira\\ Code:h12'
+  vim.cmd('set guifont=Fira\\ Code:h12')
+end
 
