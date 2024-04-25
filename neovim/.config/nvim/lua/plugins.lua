@@ -13,6 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   require('plugins.tokyonight'),
+
+  require('plugins.mason'),
   {
     'goolord/alpha-nvim',
     dependencies = {
@@ -24,7 +26,6 @@ require('lazy').setup({
       require'alpha'.setup(require('beta').config)
     end
   },
-
 
   {
     'nvim-lualine/lualine.nvim',
@@ -64,24 +65,11 @@ require('lazy').setup({
     end
   },
 
-  {
-    'williamboman/mason.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'williamboman/mason-lspconfig.nvim',
-    },
-    event = 'VeryLazy',
-    config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup()
-    end,
-  },
-
   { 'airblade/vim-rooter', event = 'VeryLazy', },
 
   -- Additional Objects and actions
   { 'kana/vim-textobj-user', event = 'VeryLazy', }, 
-  { 'michaeljsmith/vim-indent-object', dependencies = 'nvim-lspconfig', },
+  { 'michaeljsmith/vim-indent-object', dependencies = 'williamboman/mason.nvim' },
   { 'kana/vim-textobj-entire', dependencies = 'kana/vim-textobj-user', event = 'VeryLazy', },
   { 'glts/vim-textobj-comment', dependencies = 'kana/vim-textobj-user', event = 'VeryLazy', },
   { 'tomtom/tcomment_vim', event = 'VeryLazy'},
