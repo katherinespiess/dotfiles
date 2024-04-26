@@ -1,8 +1,11 @@
 return {
   "folke/which-key.nvim",
-  event = "VeryLazy",
-  init = function()
+  event = 'VeryLazy',
+  config = function()
+    vim.api.nvim_set_keymap('n', '<leader>w', ':WhichKey<CR>', { noremap = true, silent = true })
     vim.o.timeout = true
     vim.o.timeoutlen = 300
-  end,
+    local wk = require("which-key")
+    wk.register(mappings, opts)
+  end
 }

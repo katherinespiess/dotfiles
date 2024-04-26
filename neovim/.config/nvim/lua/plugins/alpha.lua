@@ -33,7 +33,7 @@ return {
             val = {
                 {
                     type = "text",
-                    val = "Recent files",
+                    val = vim.fn.getcwd,
                     opts = {
                         hl = "SpecialComment",
                         shrink_margin = false,
@@ -44,7 +44,30 @@ return {
                 {
                     type = "group",
                     val = function()
-                        return { theta.mru(0, cdir) }
+                        return { theta.mru(0, cdir, 10, { autocd = true, }) }
+                    end,
+                    opts = { shrink_margin = false },
+                },
+            },
+        }
+
+        local section_mru_home = {
+            type = "group",
+            val = {
+                {
+                    type = "text",
+                    val = vim.fn.expand("~"),
+                    opts = {
+                        hl = "SpecialComment",
+                        shrink_margin = false,
+                        position = "center",
+                    },
+                },
+                { type = "padding", val = 1 },
+                {
+                    type = "group",
+                    val = function()
+                        return { theta.mru(10, vim.fn.expand("~"), 30, { autocd = true, }) }
                     end,
                     opts = { shrink_margin = false },
                 },
@@ -57,11 +80,11 @@ return {
               { type = "padding", val = 2 },
               theta.header,
               { type = "padding", val = 2 },
-              { type = "text", val = vim.fn.getcwd, opts = { hl = "SpecialComment", position = "center" } },
-              { type = "padding", val = 3 },
               buttons,
               { type = "padding", val = 2 },
               section_mru,
+              { type = "padding", val = 2 },
+              section_mru_home,
           },
           opts = {
               margin = 5,
@@ -78,8 +101,6 @@ return {
           },
       }
       require('alpha').setup(config)
-
-
 
       vim.keymap.set('n', '<leader>h', '<CMD>Alpha<CR>', { noremap = true, silent = true, desc = 'OpenAlpha'})
     end

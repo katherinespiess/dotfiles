@@ -10,4 +10,5 @@ return {
     vim.g.tex_conceal = 'abdmg'
   end,
   ft = { 'tex', },
+  tag = "v2.14",
 }

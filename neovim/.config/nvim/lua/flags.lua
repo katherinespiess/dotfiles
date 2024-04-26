@@ -16,19 +16,18 @@ vim.opt.undodir = vim.env.HOME .. '/.config/nvim/temp/undo/'
 vim.opt.conceallevel = 1
 vim.opt.wrap = false
 
+vim.cmd('set guifont=Fira\\ Code:h12')
+
 vim.cmd[[let g:pencil#conceallevel = 0]]
 
--- vim.g.prosession_dir = vim.env.HOME .. '/.config/nvim/temp/session'
+vim.g.prosession_dir = vim.env.HOME .. '/.config/nvim/temp/session'
 vim.g.rooter_patterns = {'.root', '.git', 'Makefile'}
 
-local keymap = vim.api.nvim_set_keymap
-keymap('n', 'zn', ']s', { noremap = true, silent = true })
-keymap('n', 'zN', '[s', { noremap = true, silent = true })
-keymap('n', 'zf', 'z=', { noremap = true, silent = true })
-keymap('n', '<leader>n', ':bnext<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>p', ':bprevious<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>a', ':buf #<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>d', ':bdelete<CR>', { noremap = true, silent = true })
-keymap('n', '<leader>w', ':WhichKey<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>n', '<CMD>bnext<CR>', { noremap = true, silent = true, desc = 'go to next buffer'})
+vim.api.nvim_set_keymap('n', '<leader>p', '<CMD>bprevious<CR>', { noremap = true, silent = true, desc = 'go to previous buffer' })
+vim.api.nvim_set_keymap('n', '<leader>a', '<CMD>buf #<CR>', { noremap = true, silent = true, desc = 'go to alternative buffer' })
+vim.api.nvim_set_keymap('n', '<leader>d', '<CMD>bdelete<CR>', { noremap = true, silent = true, desc = 'delete current buffer' })
+vim.api.nvim_set_keymap('n', '<leader>', '<CMD>WhichKey \\ <CR>', { noremap = true, silent = true })
 
-vim.cmd('set guifont=Fira\\ Code:h12')
+vim.api.nvim_set_keymap('i', '<c-w>', '<c-BS>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<c-BS>', '<c-w>', { noremap = true, silent = true })
