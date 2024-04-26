@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.cmd("cd ~")
+
+if (string.find(vim.fn.getcwd(), "bin")) then
+  vim.cmd("cd ~") -- this is a work around that should be fixed
+end
 
 
 

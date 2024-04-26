@@ -21,19 +21,14 @@ vim.cmd[[let g:pencil#conceallevel = 0]]
 -- vim.g.prosession_dir = vim.env.HOME .. '/.config/nvim/temp/session'
 vim.g.rooter_patterns = {'.root', '.git', 'Makefile'}
 
-local remaps = {}
-remaps.opts_silent = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
-keymap('n', 'zn', ']s', remaps.opts_silent)
-keymap('n', 'zN', '[s', remaps.opts_silent)
-keymap('n', 'zf', 'z=', remaps.opts_silent)
-keymap('n', '<leader>n', ':bnext<CR>', remaps.opts_silent)
-keymap('n', '<leader>p', ':bprevious<CR>', remaps.opts_silent)
-keymap('n', '<leader>a', ':buf #<CR>', remaps.opts_silent)
-keymap('n', '<leader>t', ':NvimTreeFocus<CR>:NvimTreeRefresh<CR>', remaps.opts_silent)
-keymap('n', '<leader>h', ':AlphaRedraw<CR>:Alpha<CR>', remaps.opts_silent)
-keymap('n', '<leader>w', ':WhichKey<CR>', remaps.opts_silent)
-keymap('n', '<leader>f', ':Telescope builtin<CR>', remaps.opts_silent)
-keymap('n', '<leader>b', ':Telescope buffers<CR>', remaps.opts_silent)
+keymap('n', 'zn', ']s', { noremap = true, silent = true })
+keymap('n', 'zN', '[s', { noremap = true, silent = true })
+keymap('n', 'zf', 'z=', { noremap = true, silent = true })
+keymap('n', '<leader>n', ':bnext<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>p', ':bprevious<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>a', ':buf #<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>d', ':bdelete<CR>', { noremap = true, silent = true })
+keymap('n', '<leader>w', ':WhichKey<CR>', { noremap = true, silent = true })
 
 vim.cmd('set guifont=Fira\\ Code:h12')
