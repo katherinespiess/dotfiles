@@ -28,6 +28,4 @@ vim.api.nvim_set_keymap('n', '<leader>p', '<CMD>bprevious<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<leader>a', '<CMD>buf #<CR>', { noremap = true, silent = true, desc = 'go to alternative buffer' })
 vim.api.nvim_set_keymap('n', '<leader>d', '<CMD>bdelete<CR>', { noremap = true, silent = true, desc = 'delete current buffer' })
 vim.api.nvim_set_keymap('n', '<leader>', '<CMD>WhichKey \\ <CR>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('i', '<c-w>', '<c-BS>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<c-BS>', '<c-w>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>', '<CMD>WhichKey <localleader><CR>', { noremap = true, silent = true })

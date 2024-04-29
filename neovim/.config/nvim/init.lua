@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '\\'
 
 if (string.find(vim.fn.getcwd(), "bin")) then
   vim.cmd("cd ~")
@@ -20,3 +20,4 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(require('plugins'))
 
 require('flags')
+require('filetypes')

@@ -9,6 +9,6 @@ return {
     vim.g.UltiSnipsJumpBackwardTrigger="<s-tab>"
 
     -- vim.g.UltiSnipsSnippetDirectories = {'lua'}
-    vim.cmd('let g:UltiSnipsSnippetDirectories = ["C:/Users/310216903/AppData/Local/nvim/local_snippets/"]')
+    vim.cmd('let g:UltiSnipsSnippetDirectories = [stdpath("config")."/local_snippets/"]')
   end
 }
