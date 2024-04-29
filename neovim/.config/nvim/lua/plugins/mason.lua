@@ -48,13 +48,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 return {
   'williamboman/mason.nvim',
   dependencies = {
-    'neovim/nvim-lspconfig',
-    'williamboman/mason-lspconfig.nvim',
-    "mfussenegger/nvim-lint",
-    "rshkarin/mason-nvim-lint",
+    { 'neovim/nvim-lspconfig', cond = function() return vim.fn.has('win64') <= 0 end, },
+    { 'williamboman/mason-lspconfig.nvim', cond = function() return vim.fn.has('win64') <= 0 end, },
+    { "mfussenegger/nvim-lint", cond = function() return vim.fn.has('win64') <= 0 end, },
+    { "rshkarin/mason-nvim-lint", cond = function() return vim.fn.has('win64') <= 0 end, },
   },
   event = 'VeryLazy',
+  cond = function()
+    return (vim.fn.has('win64') <= 0)
+  end,
   config = function()
+
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {

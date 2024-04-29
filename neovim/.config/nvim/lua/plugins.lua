@@ -28,6 +28,8 @@ require('lazy').setup({
   require('plugins.autopairs'),
   require('plugins.trouble'),
   require('plugins.obsidian'),
+  require('plugins.gitgutter'),
+  require('plugins.which'),
 
   { 'yorik1984/newpaper.nvim',         event = 'VeryLazy', },
   { 'airblade/vim-rooter',             event = 'VeryLazy', },
@@ -41,8 +43,6 @@ require('lazy').setup({
   { 'preservim/vim-pencil',            cmd = 'PencilSoft', },
   { 'tpope/vim-fugitive',              cmd = 'Git', },
   { 'ahayworth/ink-syntax-vim',        ft = 'ink', },
-  { 'airblade/vim-gitgutter',          event = 'VeryLazy', config = function() vim.g.gitgutter_map_keys = 0 end, },
-  require('plugins.which'),
 
 
 })
