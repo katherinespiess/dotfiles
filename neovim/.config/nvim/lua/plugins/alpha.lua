@@ -116,6 +116,6 @@ return {
     }
     require('alpha').setup(config)
 
-    vim.keymap.set('n', '<leader>h', '<CMD>Alpha<CR>', { noremap = true, silent = true, desc = 'OpenAlpha' })
+    vim.keymap.set('n', '<leader>h', '<CMD>Alpha<CR>', { noremap = true, desc = 'Open Alpha' })
   end
 }
