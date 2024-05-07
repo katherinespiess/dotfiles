@@ -66,6 +66,7 @@ return {
         'grammarly',
         'texlab',
         'pylsp',
+        'clangd',
       } or {
         'lua_ls',
       },
@@ -76,6 +77,7 @@ return {
       require('lspconfig').ltex.setup({})
       require('lspconfig').grammarly.setup({})
       require('lspconfig').texlab.setup({})
+      require('lspconfig').clangd.setup({})
       require('lspconfig').pylsp.setup({
         settings = {
           pylsp = {
@@ -107,7 +109,7 @@ return {
         ensure_installed = {
           'mypy',
           'flake8',
-          'sonarlint-language-server',
+          -- 'sonarlint-language-server',
         },
       })
 
@@ -115,7 +117,7 @@ return {
         python = {
           'mypy',
           'flake8',
-          'sonarlint-language-server',
+          -- 'sonarlint-language-server',
         }
       }
     end

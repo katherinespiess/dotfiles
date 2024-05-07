@@ -31,7 +31,7 @@ vim.api.nvim_set_keymap('n', '<leader>Y', '<CMD>CopyRelativePath<CR>', { noremap
 
 vim.cmd[[
   inoremap <C-BS> <C-W>
-  inoremap <C-W> <C-BS>
+  "inoremap <C-W> <C-BS>
 ]] --I don't know why, but it only works in vimscript
 
 vim.api.nvim_set_keymap('n', '<leader>', '<CMD>WhichKey \\ <CR>', { noremap = true, silent = true })
