@@ -27,5 +27,10 @@ vim.api.nvim_set_keymap('n', '<leader>p', '<CMD>bprevious<CR>', { noremap = true
 vim.api.nvim_set_keymap('n', '<leader>a', '<CMD>buf #<CR>', { noremap = true, silent = true, desc = 'Go to alternative buffer' })
 vim.api.nvim_set_keymap('n', '<leader>d', '<CMD>bdelete<CR>', { noremap = true, silent = true, desc = 'Delete current buffer' })
 
+vim.cmd[[
+  inoremap <C-BS> <C-W>
+  inoremap <C-W> <C-BS>
+]] --I don't know why, but it only works in vimscript
+
 vim.api.nvim_set_keymap('n', '<leader>', '<CMD>WhichKey \\ <CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<localleader>', '<CMD>WhichKey <localleader><CR>', { noremap = true, silent = true })

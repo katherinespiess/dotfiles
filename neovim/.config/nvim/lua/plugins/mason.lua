@@ -48,37 +48,38 @@ vim.api.nvim_create_autocmd('LspAttach', {
 return {
   'williamboman/mason.nvim',
   dependencies = {
-    { 'neovim/nvim-lspconfig', cond = function() return vim.fn.has('win64') <= 0 end, },
-    { 'williamboman/mason-lspconfig.nvim', cond = function() return vim.fn.has('win64') <= 0 end, },
-    { "mfussenegger/nvim-lint", cond = function() return vim.fn.has('win64') <= 0 end, },
-    { "rshkarin/mason-nvim-lint", cond = function() return vim.fn.has('win64') <= 0 end, },
+    { 'neovim/nvim-lspconfig',             cond = true, },
+    { 'williamboman/mason-lspconfig.nvim', cond = true, },
+    { "mfussenegger/nvim-lint",            cond = true, },
+    { "rshkarin/mason-nvim-lint",          cond = true, },
   },
   event = 'VeryLazy',
   cond = function()
-    return (vim.fn.has('win64') <= 0)
+    return true
   end,
   config = function()
-
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = {
+      ensure_installed = vim.fn.has('win64') <= 0 and {
         'lua_ls',
         'ltex',
         'grammarly',
         'texlab',
         'pylsp',
+      } or {
+        'lua_ls',
       },
     })
 
     require('lspconfig').lua_ls.setup({})
-    require('lspconfig').ltex.setup({})
-    require('lspconfig').grammarly.setup({})
-    require('lspconfig').texlab.setup({})
-    require('lspconfig').pylsp.setup({
-      on_attach = custom_attach,
-      settings = {
+    if (vim.fn.has('win64') <= 0) then
+      require('lspconfig').ltex.setup({})
+      require('lspconfig').grammarly.setup({})
+      require('lspconfig').texlab.setup({})
+      require('lspconfig').pylsp.setup({
+        settings = {
           pylsp = {
-          plugins = {
+            plugins = {
               -- formatter options
               black = { enabled = true },
               autopep8 = { enabled = false },
@@ -93,37 +94,36 @@ return {
               jedi_completion = { fuzzy = true },
               -- import sorting
               pyls_isort = { enabled = true },
+            },
           },
-          },
-      },
-      flags = {
+        },
+        flags = {
           debounce_text_changes = 200,
-      },
-    })
+        },
+      })
 
 
-    require("mason-nvim-lint").setup({
-      ensure_installed = {
-        'mypy',
-        'flake8',
-        'sonarlint-language-server',
-      },
-    })
+      require("mason-nvim-lint").setup({
+        ensure_installed = {
+          'mypy',
+          'flake8',
+          'sonarlint-language-server',
+        },
+      })
 
-    require('lint').linters_by_ft = {
-      python  = {
-        'mypy',
-        'flake8',
-        -- 'sonarlint-language-server',
+      require('lint').linters_by_ft = {
+        python = {
+          'mypy',
+          'flake8',
+          'sonarlint-language-server',
+        }
       }
-    }
+    end
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       callback = function()
         require("lint").try_lint()
       end,
     })
-
-
   end,
 }

@@ -9,6 +9,6 @@ return {
     vim.g.vimtex_quickfix_mode = 0
     vim.g.tex_conceal = 'abdmg'
   end,
-  ft = { 'tex', },
+  ft = { 'tex', 'md', },
   tag = "v2.14",
 }
