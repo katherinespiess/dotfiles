@@ -31,22 +31,16 @@ require('lazy').setup({
   require('plugins.gitgutter'),
   require('plugins.which'),
   require('plugins.pencil'),
-
+  require('plugins.copypath'),
+  require('plugins.surround'),
   { 'yorik1984/newpaper.nvim',         event = 'VeryLazy', },
   { 'airblade/vim-rooter',             event = 'VeryLazy', },
   { 'kana/vim-textobj-user',           event = 'VeryLazy', },
   { 'michaeljsmith/vim-indent-object', event = 'VeryLazy', },
-  { 'kana/vim-textobj-entire',         event = 'VeryLazy', dependencies = 'kana/vim-textobj-user', },
-  { 'glts/vim-textobj-comment',        event = 'VeryLazy', dependencies = 'kana/vim-textobj-user', },
   { 'tomtom/tcomment_vim',             event = 'VeryLazy', },
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy', },
-  { 'kylechui/nvim-surround',          event = 'VeryLazy', config = function() require('nvim-surround').setup({}) end },
-  {
-    "ohakutsu/socks-copypath.nvim",
-    config = function()
-      require("socks-copypath").setup()
-    end,
-  },
+  { 'kana/vim-textobj-entire',         event = 'VeryLazy', dependencies = 'kana/vim-textobj-user', },
+  { 'glts/vim-textobj-comment',        event = 'VeryLazy', dependencies = 'kana/vim-textobj-user', },
   { 'tpope/vim-fugitive',       cmd = 'Git', },
   { 'ahayworth/ink-syntax-vim', ft = 'ink', },
 

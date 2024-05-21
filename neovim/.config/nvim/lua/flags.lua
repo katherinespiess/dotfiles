@@ -26,6 +26,8 @@ vim.api.nvim_set_keymap('n', '<leader>n', '<CMD>bnext<CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<leader>p', '<CMD>bprevious<CR>', { noremap = true, silent = true, desc = 'Go to previous buffer' })
 vim.api.nvim_set_keymap('n', '<leader>a', '<CMD>buf #<CR>', { noremap = true, silent = true, desc = 'Go to alternative buffer' })
 vim.api.nvim_set_keymap('n', '<leader>d', '<CMD>bdelete<CR>', { noremap = true, silent = true, desc = 'Delete current buffer' })
+vim.api.nvim_set_keymap('n', '<leader>y', '<CMD>CopyPath<CR>', { noremap = true, silent = true, desc = 'Copy path' })
+vim.api.nvim_set_keymap('n', '<leader>Y', '<CMD>CopyRelativePath<CR>', { noremap = true, silent = true, desc = 'Copy relative path' })
 
 vim.cmd[[
   inoremap <C-BS> <C-W>
