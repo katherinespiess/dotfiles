@@ -41,8 +41,14 @@ require('lazy').setup({
   { 'tomtom/tcomment_vim',             event = 'VeryLazy', },
   { 'vim-scripts/ReplaceWithRegister', event = 'VeryLazy', },
   { 'kylechui/nvim-surround',          event = 'VeryLazy', config = function() require('nvim-surround').setup({}) end },
-  { 'tpope/vim-fugitive',              cmd = 'Git', },
-  { 'ahayworth/ink-syntax-vim',        ft = 'ink', },
+  {
+    "ohakutsu/socks-copypath.nvim",
+    config = function()
+      require("socks-copypath").setup()
+    end,
+  },
+  { 'tpope/vim-fugitive',       cmd = 'Git', },
+  { 'ahayworth/ink-syntax-vim', ft = 'ink', },
 
 
 })
