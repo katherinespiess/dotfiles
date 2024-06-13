@@ -19,7 +19,8 @@ return {
           option = {
             keep_all_entries = false,
             enable_in_context = function()
-              return require('cmp.config.context').in_treesitter_capture('spell')
+              -- return require('cmp.config.context').in_treesitter_capture('spell')
+              return true
             end,
           },
         },
@@ -42,6 +43,7 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'ultisnips' }, -- For ultisnips users.
+        { name = 'spell'},
       }, {
         { name = 'buffer' },
       })

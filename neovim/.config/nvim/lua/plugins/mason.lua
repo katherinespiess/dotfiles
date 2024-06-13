@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', '<localleader>f', vim.lsp.buf.format, 'format')
 
     -- Selects a code action available at the current cursor position
-    bufmap('n', '<localleader><localleader>', vim.lsp.buf.code_action, 'code action')
+    bufmap('n', '<localleader><localleader>', function() vim.cmd("CodeActionMenu") end, 'code action')
   end
 })
 
@@ -63,7 +63,6 @@ return {
       ensure_installed = vim.fn.has('win64') <= 0 and {
         'lua_ls',
         'ltex',
-        'grammarly',
         'texlab',
         'pylsp',
         'clangd',
@@ -75,7 +74,6 @@ return {
     require('lspconfig').lua_ls.setup({})
     if (vim.fn.has('win64') <= 0) then
       require('lspconfig').ltex.setup({})
-      require('lspconfig').grammarly.setup({})
       require('lspconfig').texlab.setup({})
       require('lspconfig').clangd.setup({})
       require('lspconfig').pylsp.setup({
