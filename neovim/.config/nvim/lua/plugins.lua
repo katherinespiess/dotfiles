@@ -33,6 +33,7 @@ require('lazy').setup({
   require('plugins.pencil'),
   require('plugins.copypath'),
   require('plugins.surround'),
+  require('plugins.copilot'),
   { 'yorik1984/newpaper.nvim',           event = 'VeryLazy', },
   { 'airblade/vim-rooter',               event = 'VeryLazy', },
   { 'kana/vim-textobj-user',             event = 'VeryLazy', },

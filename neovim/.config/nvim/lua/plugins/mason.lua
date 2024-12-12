@@ -68,6 +68,7 @@ return {
         'clangd',
       } or {
         'lua_ls',
+        'grammarly',
       },
     })
 
@@ -118,6 +119,8 @@ return {
           -- 'sonarlint-language-server',
         }
       }
+    else
+      require('lspconfig').grammarly.setup({})
     end
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
